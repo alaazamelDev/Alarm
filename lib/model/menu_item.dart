@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import 'enums.dart';
+import '../constants_pkg/enums.dart';
 
 class MenuItem extends ChangeNotifier {
   ItemType itemType;

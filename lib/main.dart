@@ -1,5 +1,9 @@
-import 'package:alarm/activities/homepage.dart';
+import 'package:alarm/views/homepage.dart';
+import 'package:alarm/constants_pkg/enums.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'model/menu_item.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,13 +12,17 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp( 
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Alarm App',
       theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity),
-      home: HomePage(),
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: ChangeNotifierProvider<MenuItem>(
+        create: (context) => MenuItem(ItemType.clock),
+        child: HomePage(),
+      ),
     );
   }
 }

@@ -40,8 +40,9 @@ class ClockPainter extends CustomPainter {
     //create the center point
     var center = Offset(centerX, centerY);
 
-    /*create the radius of the circle which is the minimunm space 
-    between center point and eadge*/
+    /*create the radius of the circle which is the minimum space
+    between center point and edge
+    */
     var radius = min(centerX, centerY);
 
     //create a custom brush to paint circle
