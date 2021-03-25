@@ -1,10 +1,33 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
-class AlarmItem {
-  DateTime dateTime;
-  String description;
-  bool isActive;
-  List<Color> gradientColor;
+class AlarmItem extends ChangeNotifier{
+  int id;
+  String title;
+  String dateTime;
+  int isActive;
+  int gradientColorIndex;
 
-  AlarmItem(this.dateTime, {this.description, this.isActive, this.gradientColor});
+  AlarmItem({
+    this.id,
+    this.title,
+    this.dateTime,
+    this.isActive,
+    this.gradientColorIndex,
+  });
+
+  factory AlarmItem.fromMap(Map<String, dynamic> json) => AlarmItem(
+        id: json["id"],
+        title: json["title"],
+        dateTime: json["datetime"],
+        isActive: json["isactive"],
+        gradientColorIndex: json["colorindex"],
+      );
+
+  Map<String, dynamic> toMap() => {
+        "id": id,
+        "title": title,
+        "datetime": dateTime,
+        "isactive": isActive,
+        "colorindex": gradientColorIndex,
+      };
 }

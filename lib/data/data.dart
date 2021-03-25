@@ -1,4 +1,3 @@
-import 'package:alarm/constants_pkg/constants.dart';
 import 'package:alarm/constants_pkg/enums.dart';
 import 'package:alarm/model/alarm_item.dart';
 import 'package:alarm/model/menu_item.dart';
@@ -13,11 +12,4 @@ List<MenuItem> items = [
       title: 'Timer', imageSource: 'assets/timer_icon.png'),
   MenuItem(ItemType.stopwatch,
       title: 'Stopwatch', imageSource: 'assets/stopwatch_icon.png'),
-];
-
-//list of the alarms
-List<AlarmItem> alarms = [
-  AlarmItem(DateTime.now().add(Duration(hours: 1)), description: 'Job',gradientColor: GradientColors.sky),
-  AlarmItem(DateTime.now().add(Duration(hours: 2)), description: 'Sport',gradientColor: GradientColors.fire),
-  AlarmItem(DateTime.now().add(Duration(minutes: 23)), description: 'Study',gradientColor: GradientColors.mango),
 ];

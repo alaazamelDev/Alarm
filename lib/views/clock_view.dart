@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -12,6 +13,15 @@ class ClockView extends StatefulWidget {
 }
 
 class _ClockViewState extends State<ClockView> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    
+    Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {});
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Container(

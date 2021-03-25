@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:alarm/views/clock_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ClockFragment extends StatefulWidget {
   const ClockFragment({
@@ -49,14 +52,7 @@ class _ClockFragmentState extends State<ClockFragment> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      widget.formattedTime,
-                      style: TextStyle(
-                        fontSize: 64,
-                        color: Colors.white,
-                        fontFamily: 'avenir',
-                      ),
-                    ),
+                    DigitalClock(widget: widget),
                     Text(
                       widget.formattedDate,
                       style: TextStyle(
@@ -118,5 +114,48 @@ class _ClockFragmentState extends State<ClockFragment> {
             ],
           ),
         ));
+  }
+}
+
+class DigitalClock extends StatefulWidget {
+  const DigitalClock({
+    Key key,
+    @required this.widget,
+  }) : super(key: key);
+
+  final ClockFragment widget;
+
+  @override
+  _DigitalClockState createState() => _DigitalClockState();
+}
+
+class _DigitalClockState extends State<DigitalClock> {
+  var formattedTime = DateFormat('HH:mm').format(DateTime.now());
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    Timer.periodic(Duration(seconds: 1), (timer) {
+      var previousMinute = DateTime.now().add(Duration(seconds: -1)).minute;
+      var currentMinute = DateTime.now().minute;
+      if (currentMinute != previousMinute)
+        setState(() {
+          formattedTime = DateFormat('HH:mm').format(DateTime.now());
+        });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      formattedTime,
+      style: TextStyle(
+        fontSize: 64,
+        color: Colors.white,
+        fontFamily: 'avenir',
+      ),
+    );
   }
 }

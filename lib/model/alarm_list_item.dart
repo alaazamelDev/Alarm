@@ -1,6 +1,9 @@
-
+import 'package:alarm/constants_pkg/constants.dart';
 import 'package:alarm/model/alarm_item.dart';
+import 'package:alarm/resources/db/alarm_db_helper.dart';
+import 'package:alarm/views/alarm_page.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AlarmListItem extends StatefulWidget {
   final AlarmItem alarmItem;
@@ -19,14 +22,15 @@ class _AlarmListItemState extends State<AlarmListItem> {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: alarmitem.gradientColor,
+          colors: GradientColors.colorsList[alarmitem.gradientColorIndex],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         ),
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: alarmitem.gradientColor.last.withOpacity(0.4),
+            color: GradientColors.colorsList[alarmitem.gradientColorIndex].last
+                .withOpacity(0.4),
             offset: Offset(4, 4),
             blurRadius: 8,
             spreadRadius: 2,
@@ -53,7 +57,7 @@ class _AlarmListItemState extends State<AlarmListItem> {
                       width: 8,
                     ),
                     Text(
-                      'Office',
+                      alarmitem.title,
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.white,
@@ -81,7 +85,7 @@ class _AlarmListItemState extends State<AlarmListItem> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '07:00 AM',
+                  DateFormat.jm().format(DateTime.parse(alarmitem.dateTime)),
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w700,
@@ -89,10 +93,13 @@ class _AlarmListItemState extends State<AlarmListItem> {
                     fontFamily: 'avenir',
                   ),
                 ),
-                Icon(
-                  Icons.keyboard_arrow_down,
+                IconButton(
                   color: Colors.white,
-                  size: 24,
+                  iconSize: 24,
+                  icon: Icon(Icons.delete),
+                  onPressed: () {
+                    AlarmHelper.instance.delete(alarmitem);
+                  },
                 )
               ],
             )
